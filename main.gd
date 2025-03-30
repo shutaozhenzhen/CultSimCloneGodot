@@ -37,6 +37,14 @@ func _ready() -> void:
 	size_error_exit(screen_size)
 	var window := get_window()
 	window.min_size = min_size
+	
+	var bg := TextureRect.new()
+	bg.texture = load(main_background_image)
+	bg.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	bg.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	bg.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	add_child(bg)
+	
 	var button_vbox := VBoxContainer.new()
 	var new_game_button = Button.new()
 	new_game_button.text = "New Game"
