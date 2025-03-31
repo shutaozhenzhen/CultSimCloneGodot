@@ -34,6 +34,7 @@ func make_sure_exit():
 func _ready() -> void:
 	var primary_screen_index := DisplayServer.get_primary_screen()
 	var screen_size := DisplayServer.screen_get_size(primary_screen_index)
+	Logger.print_info(screen_size)
 	size_error_exit(screen_size)
 	var window := get_window()
 	window.min_size = min_size
