@@ -17,7 +17,7 @@ func print_info(info):
 			infos = info
 		_:
 			infos = [info]
-	info.push_front(get_func_name())
+	infos.push_front(get_func_name())
 	print.bindv(infos).call()
 
 func print_warn(info):
