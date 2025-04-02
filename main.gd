@@ -1,3 +1,4 @@
+@tool
 extends Control
 
 const asset_path := "res://assets/"
@@ -58,6 +59,7 @@ func _ready() -> void:
 	center_container.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	center_container.add_child(button_vbox)
 	add_child(center_container)
+	center_container.owner = get_tree().edited_scene_root
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
