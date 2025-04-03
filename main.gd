@@ -43,8 +43,17 @@ func _ready() -> void:
 	var bg := TextureRect.new()
 	bg.texture = load(main_background_image)
 	bg.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-	bg.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	bg.stretch_mode = TextureRect.STRETCH_SCALE
 	bg.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	var bg_texture_size = bg.texture.get_size()
+	var bg_ratio = float(bg.texture.get_width())/float(bg.texture.get_height())
+	Logger.print_info(bg_ratio)
+	
+	var bg_container = AspectRatioContainer.new()
+	bg_container.ratio = bg_ratio
+	bg_container.stretch_mode=AspectRatioContainer.STRETCH_FIT
+	bg_container.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	bg_container.add_child(bg)
 	
 	
 	var button_vbox := VBoxContainer.new()
@@ -69,7 +78,7 @@ func _ready() -> void:
 	center_container.add_child(button_vbox)
 	bg.add_child(center_container)
 	
-	add_child(bg)
+	add_child(bg_container)
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
