@@ -31,7 +31,18 @@ func make_sure_exit():
 	add_child(confirm_dialog)
 	confirm_dialog.popup_centered()
 	
+func new_game():
+	Logger.print_info("new game")
+	var scene = preload("uid://chpti8bgqct3m").instantiate()
+	var json_obj:Dictionary = {
+		"id":"test",
+		"label":"test",
+		"description":"test\ntest",
+	}
+	scene.initialize(json_obj)
+	add_child(scene)
 	
+
 func _ready() -> void:
 	var primary_screen_index := DisplayServer.get_primary_screen()
 	var screen_size := DisplayServer.screen_get_size(primary_screen_index)
@@ -59,6 +70,7 @@ func _ready() -> void:
 	var button_vbox := VBoxContainer.new()
 	var new_game_button = Button.new()
 	new_game_button.text = "New Game"
+	new_game_button.pressed.connect(new_game)
 	button_vbox.add_child(new_game_button)
 	var exit_game_button = Button.new()
 	exit_game_button.text = "Exit Game"
