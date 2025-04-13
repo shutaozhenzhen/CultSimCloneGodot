@@ -46,20 +46,39 @@ func initialize(json_dict:Dictionary):
 func _ready() -> void:
 	assert(param_locked != false)
 	assert(id != "")
-	var sprite = Sprite2D.new()
-	sprite.texture = icon_texture
-	#sprite.rect_size = Vector2(300, 200)
-	add_child(sprite)
-	
+	var control := Control.new()
+	var bg := TextureRect.new()
+	bg.texture = icon_texture
+	bg.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	bg.stretch_mode = TextureRect.STRETCH_SCALE
+	bg.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	var bg_ratio = float(bg.texture.get_width())/float(bg.texture.get_height())
+	var bg_container = AspectRatioContainer.new()
+	bg_container.ratio = bg_ratio
+	bg_container.stretch_mode=AspectRatioContainer.STRETCH_FIT
+	bg_container.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	bg_container.add_child(bg)
+	bg_container.custom_minimum_size = Vector2(300, 300)
+
+	# 创建或修改 LabelSettings
+	var label_settings = LabelSettings.new()
+	label_settings.font_size = 32  # 设置字体大小
 	var card_label = Label.new()
+	card_label.label_settings = label_settings
 	card_label.text = label
-	card_label.size = Vector2(300, 50)
-	add_child(card_label)
+	card_label.custom_minimum_size = Vector2(300, 50)
+	card_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	var vbox := VBoxContainer.new()
+	vbox.add_child(bg_container)
+	vbox.add_child(card_label)
+	var style_box = StyleBoxFlat.new()
+	style_box.bg_color = Color(0.2, 0.5, 0.8)  # RGB 颜色值
+	var panel := PanelContainer.new()
+	panel.add_theme_stylebox_override("panel", style_box)
+	panel.add_child(vbox)
+	control.add_child(panel)
+	add_child(control)
 	
-	var card_description = RichTextLabel.new()
-	card_description.text = description
-	card_label.size = Vector2(300, 400)
-	add_child(card_description)
 	
 	
 
