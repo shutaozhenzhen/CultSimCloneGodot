@@ -72,21 +72,22 @@ func _ready() -> void:
 	new_game_button.text = "New Game"
 	new_game_button.pressed.connect(new_game)
 	button_vbox.add_child(new_game_button)
+	var setting_button = Button.new()
+	setting_button.text = "Setting"
+	#setting_button.pressed.connect(make_sure_exit)
+	button_vbox.add_child(setting_button)
 	var exit_game_button = Button.new()
 	exit_game_button.text = "Exit Game"
 	exit_game_button.pressed.connect(make_sure_exit)
 	button_vbox.add_child(exit_game_button)
 	var center_container := CenterContainer.new()
 		# 设置 center_container 锚点为右下角，并且适配 1/4 尺寸区域
-	center_container.set_anchor(SIDE_LEFT, 0.75) # 左边从 3/4 处开始
-	center_container.set_anchor(SIDE_TOP, 0.75) # 顶部从 3/4 处开始
+	center_container.set_anchor(SIDE_LEFT, 0.5) # 左边从 3/4 处开始
+	center_container.set_anchor(SIDE_TOP, 0.5) # 顶部从 3/4 处开始
 	center_container.set_anchor(SIDE_RIGHT, 1) # 右侧贴紧父容器的右侧
 	center_container.set_anchor(SIDE_BOTTOM, 1) # 底部贴紧父容器的底部
 	# 更新中心容器的偏移量以适应新的锚点
-	center_container.set_offset(SIDE_LEFT, 0) # 不需要额外的左偏移
-	center_container.set_offset(SIDE_TOP, 0) # 不需要额外的上偏移
-	center_container.set_offset(SIDE_RIGHT, 0) # 右偏移设为 0
-	center_container.set_offset(SIDE_BOTTOM, 0) # 下偏移设为 0
+	center_container.set_offsets_preset(Control.PRESET_FULL_RECT);
 	center_container.add_child(button_vbox)
 	bg.add_child(center_container)
 	
