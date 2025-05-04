@@ -1,4 +1,3 @@
-@tool
 extends Node2D
 const asset_path := "res://assets/"
 const image_path := asset_path + "image/"

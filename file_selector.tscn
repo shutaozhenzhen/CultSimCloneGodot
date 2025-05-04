@@ -1,0 +1,33 @@
+[gd_scene load_steps=2 format=3 uid="uid://b3eyhfc1nbaj"]
+
+[ext_resource type="Script" uid="uid://5a7naq5du6wh" path="res://file_selector.gd" id="1_jjya3"]
+
+[node name="HBoxContainer" type="HBoxContainer"]
+script = ExtResource("1_jjya3")
+
+[node name="MenuButton" type="MenuButton" parent="."]
+layout_mode = 2
+flat = false
+alignment = 2
+
+[node name="LineEdit" type="LineEdit" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+clear_button_enabled = true
+
+[node name="Timer" type="Timer" parent="LineEdit"]
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+text = "Select"
+
+[node name="FileDialog" type="FileDialog" parent="."]
+title = "Open a Directory"
+ok_button_text = "Select Current Folder"
+file_mode = 2
+access = 2
+
+[connection signal="text_changed" from="LineEdit" to="." method="_on_line_edit_text_changed"]
+[connection signal="timeout" from="LineEdit/Timer" to="." method="_on_timer_timeout"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="dir_selected" from="FileDialog" to="." method="_on_file_dialog_dir_selected"]

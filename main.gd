@@ -41,6 +41,31 @@ func new_game():
 	}
 	scene.initialize(json_obj)
 	add_child(scene)
+
+func setting_panel():
+	Logger.print_info("setting")
+	var setting_panel = Panel.new()
+	setting_panel.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	var style_box = StyleBoxFlat.new()
+	style_box.bg_color = Color(0.2, 0.2, 0.2)  # RGB 颜色值
+	setting_panel.add_theme_stylebox_override("panel", style_box)
+	var main_json_panel = Panel.new()
+	var main_json_label = Label.new()
+	main_json_label.text = "main json path"
+	var main_json_input = LineEdit.new()
+	var main_json_button = Button.new()
+	var main_json_grid = GridContainer.new()
+	var main_json_vbox = VBoxContainer.new()
+	main_json_grid.columns = 2
+	main_json_input.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	main_json_grid.add_child(main_json_input)
+	main_json_grid.add_child(main_json_button)
+	main_json_vbox.add_child(main_json_label)
+	main_json_vbox.add_child(main_json_grid)
+	main_json_panel.add_child(main_json_vbox)
+	setting_panel.add_child(main_json_panel)
+	
+	add_child(setting_panel)
 	
 
 func _ready() -> void:
@@ -74,7 +99,7 @@ func _ready() -> void:
 	button_vbox.add_child(new_game_button)
 	var setting_button = Button.new()
 	setting_button.text = "Setting"
-	#setting_button.pressed.connect(make_sure_exit)
+	setting_button.pressed.connect(setting_panel)
 	button_vbox.add_child(setting_button)
 	var exit_game_button = Button.new()
 	exit_game_button.text = "Exit Game"

@@ -28,3 +28,16 @@ func get_bool(json_dict:Dictionary, key:StringName) -> bool:
 	assert(TYPE_BOOL == typeof(json_dict.get(key)))
 	return json_dict.get(key)
 	
+func try_get_int(json_dict:Dictionary, key:StringName, default:int = 0) -> bool:
+	if json_dict.has(key):
+			if TYPE_INT == typeof(json_dict.get(key)):
+				return json_dict.get(key)
+			else:
+				Logger.print_warn("%s not in type %s but in %s" % [key, type_string(TYPE_INT), type_string(typeof(json_dict.get(key)))])
+	return default
+	
+func get_int(json_dict:Dictionary, key:StringName) -> bool:
+	assert(json_dict.has(key))
+	assert(TYPE_INT == typeof(json_dict.get(key)))
+	return json_dict.get(key)
+	

@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://bdorh4nwgp0gx"]
+
+[ext_resource type="PackedScene" uid="uid://b3eyhfc1nbaj" path="res://file_selector.tscn" id="1_jbfx7"]
+[ext_resource type="Script" uid="uid://40xs40x5e60t" path="res://file_selector_with_delete.gd" id="1_sovjd"]
+
+[node name="HBoxContainer" type="HBoxContainer"]
+script = ExtResource("1_sovjd")
+
+[node name="file_selector" parent="." instance=ExtResource("1_jbfx7")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+text = "🗑️"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
